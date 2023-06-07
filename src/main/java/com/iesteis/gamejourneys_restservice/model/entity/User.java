@@ -20,10 +20,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @NonNull
     private String username;
+
     @NonNull
     private String password;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_authorities")
     @NonNull
@@ -53,5 +56,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    List<Game> backlog;
 
 }
