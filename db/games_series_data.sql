@@ -1,0 +1,5 @@
+INSERT INTO games_series (game_id, series_id) VALUES ((SELECT id FROM games WHERE game_name = 'Dark Souls'), (SELECT id FROM series WHERE series_name = 'Dark Souls'));
+INSERT INTO games_series (game_id, series_id) VALUES ((SELECT id FROM games WHERE game_name = 'Dark Souls Remastered'), (SELECT id FROM series WHERE series_name = 'Dark Souls'));
+INSERT INTO games_series (game_id, series_id) VALUES ((SELECT id FROM games WHERE game_name = 'Dark Souls II'), (SELECT id FROM series WHERE series_name = 'Dark Souls'));
+INSERT INTO games_series (game_id, series_id) VALUES ((SELECT id FROM games WHERE game_name = 'Dark Souls II: Scholar of the First Sin'), (SELECT id FROM series WHERE series_name = 'Dark Souls'));
+INSERT INTO games_series (game_id, series_id) VALUES ((SELECT id FROM games WHERE game_name = 'Dark Souls III'), (SELECT id FROM series WHERE series_name = 'Dark Souls'));

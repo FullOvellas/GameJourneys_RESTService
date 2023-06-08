@@ -1,0 +1,15 @@
+INSERT INTO platform (platform_name) VALUES ('PlayStation');
+INSERT INTO platform (platform_name) VALUES ('PlayStation 2');
+INSERT INTO platform (platform_name) VALUES ('PlayStation 3');
+INSERT INTO platform (platform_name) VALUES ('PlayStation 4');
+INSERT INTO platform (platform_name) VALUES ('PlayStation 5');
+INSERT INTO platform (platform_name) VALUES ('Xbox');
+INSERT INTO platform (platform_name) VALUES ('Xbox 360');
+INSERT INTO platform (platform_name) VALUES ('Xbox One');
+INSERT INTO platform (platform_name) VALUES ('Xbox Series');
+INSERT INTO platform (platform_name) VALUES ('Xbox Series');
+INSERT INTO platform (platform_name) VALUES ('Steam');
+INSERT INTO platform (platform_name) VALUES ('Epic Games');
+INSERT INTO platform (platform_name) VALUES ('Amazon Games');
+INSERT INTO platform (platform_name) VALUES ('GOG');
+INSERT INTO platform (platform_name) VALUES ('PC');
