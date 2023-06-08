@@ -1,22 +1,20 @@
-package com.iesteis.gamejourneys_restservice.model.entity;
+package com.iesteis.gamejourneys_restservice.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "genres")
-public class Genre {
+@Table(name = "platform")
+public class Platform {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "genre_name")
+    @Column(name = "platform_name")
     private String name;
 
     public Long getId() {

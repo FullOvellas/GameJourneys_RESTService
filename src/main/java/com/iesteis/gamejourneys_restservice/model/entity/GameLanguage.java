@@ -32,4 +32,27 @@ public class GameLanguage {
 
     private boolean subtitles;
 
+    public GameLanguageKey getId() {
+        return id;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public boolean isTexts() {
+        return texts;
+    }
+
+    public boolean isVoiceActing() {
+        return voiceActing;
+    }
+
+    public boolean isSubtitles() {
+        return subtitles;
+    }
 }

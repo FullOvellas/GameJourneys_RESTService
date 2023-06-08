@@ -22,4 +22,15 @@ public class Developer {
     @JoinColumn(name = "country_id")
     private Country country;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getDeveloperName() {
+        return developerName;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
 }

@@ -25,4 +25,7 @@ public class Authority implements GrantedAuthority {
         return authority;
     }
 
+    public Long getId() {
+        return id;
+    }
 }

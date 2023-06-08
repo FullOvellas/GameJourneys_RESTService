@@ -1,8 +1,13 @@
-spring.datasource.url=jdbc:mysql://localhost:3306/GameJourneys
-spring.datasource.name=GameJourneys
-spring.datasource.password=root
-spring.datasource.username=root
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.database=mysql
-jwt.secret=Ejk8yT%[dae,G+vMVEpCPpc5:Nj!%kXG{=bH/V]Vf_;U{?RA[S4!KN8c??_v!E(dCVUr
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/GameJourneys
+    name: GameJourneys
+    password: root
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: mysql
+jwt:
+  secret: Ejk8yT%[dae,G+vMVEpCPpc5:Nj!%kXG{=bH/V]Vf_;U{?RA[S4!KN8c??_v!E(dCVUr

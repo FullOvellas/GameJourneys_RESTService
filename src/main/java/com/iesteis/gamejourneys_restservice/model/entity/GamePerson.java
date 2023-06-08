@@ -29,4 +29,19 @@ public class GamePerson {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    public GamePersonKey getId() {
+        return id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Role getRole() {
+        return role;
+    }
 }

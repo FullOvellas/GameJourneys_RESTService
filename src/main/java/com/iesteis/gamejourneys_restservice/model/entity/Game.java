@@ -16,7 +16,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "game_name")
+    @Column(name = "game_name", nullable = false)
     private String name;
 
     private boolean spinoff;
@@ -45,4 +45,84 @@ public class Game {
     )
     private List<Series> series;
 
+    @OneToMany(mappedBy = "game")
+    private List<Release> releases;
+
+    @OneToMany(mappedBy = "remadeGame")
+    private List<Remake> remakes;
+
+    @OneToMany(mappedBy = "remasteredGame")
+    private List<Remaster> remasters;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isSpinoff() {
+        return spinoff;
+    }
+
+    public void setSpinoff(boolean spinoff) {
+        this.spinoff = spinoff;
+    }
+
+    public List<Developer> getDevelopers() {
+        return developers;
+    }
+
+    public void setDevelopers(List<Developer> developers) {
+        this.developers = developers;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public List<Series> getSeries() {
+        return series;
+    }
+
+    public void setSeries(List<Series> series) {
+        this.series = series;
+    }
+
+    public List<Release> getReleases() {
+        return releases;
+    }
+
+    public void setReleases(List<Release> releases) {
+        this.releases = releases;
+    }
+
+    public List<Remake> getRemakes() {
+        return remakes;
+    }
+
+    public void setRemakes(List<Remake> remakes) {
+        this.remakes = remakes;
+    }
+
+    public List<Remaster> getRemasters() {
+        return remasters;
+    }
+
+    public void setRemasters(List<Remaster> remasters) {
+        this.remasters = remasters;
+    }
 }

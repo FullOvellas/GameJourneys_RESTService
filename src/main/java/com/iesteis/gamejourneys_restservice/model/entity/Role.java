@@ -5,8 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -23,4 +21,15 @@ public class Role {
     @JoinColumn(name = "role_type_id")
     private RoleType roleType;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
 }

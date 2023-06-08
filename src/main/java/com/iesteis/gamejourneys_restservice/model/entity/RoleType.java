@@ -5,8 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "role_types")
 public class RoleType {
@@ -19,4 +17,11 @@ public class RoleType {
     @Column(name = "role_type_name")
     private String roleTypeName;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getRoleTypeName() {
+        return roleTypeName;
+    }
 }

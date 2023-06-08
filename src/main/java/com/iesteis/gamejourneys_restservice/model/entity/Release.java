@@ -1,13 +1,11 @@
 package com.iesteis.gamejourneys_restservice.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.iesteis.gamejourneys_restservice.model.Platform;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "releases")
 public class Release {
@@ -31,5 +29,37 @@ public class Release {
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     Publisher publisher;
+
+    @ManyToMany
+    @JoinTable(
+            name = "releases_platforms",
+            joinColumns = @JoinColumn(name = "release_id"),
+            inverseJoinColumns = @JoinColumn(name = "platform_id")
+    )
+    List<Platform> platforms;
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public List<Platform> getPlatforms() {
+        return platforms;
+    }
 
 }

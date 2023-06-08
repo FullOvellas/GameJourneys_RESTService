@@ -32,4 +32,19 @@ public class GameList {
     )
     private List<Game> games;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public User getListOwner() {
+        return listOwner;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
 }

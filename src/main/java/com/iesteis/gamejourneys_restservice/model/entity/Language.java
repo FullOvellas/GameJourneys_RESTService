@@ -22,4 +22,15 @@ public class Language {
     @Column(name = "iso_language_code")
     private String isoLanguageCode;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    public String getIsoLanguageCode() {
+        return isoLanguageCode;
+    }
 }

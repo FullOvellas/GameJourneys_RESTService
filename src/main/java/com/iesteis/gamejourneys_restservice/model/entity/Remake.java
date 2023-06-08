@@ -5,14 +5,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Remake extends Game {
 
     @ManyToOne
     @JoinColumn(name = "remade_game_id")
     private Game remadeGame;
 
+    public Game getRemadeGame() {
+        return remadeGame;
+    }
+
+    public void setRemadeGame(Game remadeGame) {
+        this.remadeGame = remadeGame;
+    }
 }

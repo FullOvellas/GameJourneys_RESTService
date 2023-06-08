@@ -25,4 +25,19 @@ public class Person {
     @Column(name = "second_surname")
     private String secondSurname;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getFirstSurname() {
+        return firstSurname;
+    }
+
+    public String getSecondSurname() {
+        return secondSurname;
+    }
 }
