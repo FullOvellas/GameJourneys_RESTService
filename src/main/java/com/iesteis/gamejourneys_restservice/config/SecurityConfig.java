@@ -48,9 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint((request, response, ex) -> {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-                })
+                .authenticationEntryPoint((request, response, ex) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage()))
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers("/api/auth/login").permitAll()

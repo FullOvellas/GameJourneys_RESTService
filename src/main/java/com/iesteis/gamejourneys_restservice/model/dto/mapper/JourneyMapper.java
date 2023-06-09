@@ -5,15 +5,17 @@ import com.iesteis.gamejourneys_restservice.model.dto.Journey;
 import com.iesteis.gamejourneys_restservice.model.dto.JourneyNode;
 import com.iesteis.gamejourneys_restservice.model.entity.*;
 import com.iesteis.gamejourneys_restservice.repository.GamePersonRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
+@Component
 public class JourneyMapper {
 
-    private static final int LINK_THRESHOLD = 20;
+    private static final int LINK_THRESHOLD = 1;
     private final GamePersonRepository gamePersonRepository;
     private final Function<GamePerson, Pair<Person, RoleType>> mapToPersonRoleTypePair = gamePerson ->
             new Pair<>(gamePerson.getPerson(), gamePerson.getRole().getRoleType());
@@ -23,7 +25,7 @@ public class JourneyMapper {
     }
 
     public Journey toJourney(GameList gameList) {
-        var nodes = toJourneyNodeArray(gameList.getGames());
+        var nodes = toJourneyNodeList(gameList.getGames());
         var linksWeights = calculateLinksAndWeights(gameList.getGames());
         var links = linksWeights.getFirstElement();
         var weights = linksWeights.getSecondElement();
@@ -32,23 +34,23 @@ public class JourneyMapper {
         return new Journey(nodes, links, weights);
     }
 
-    private JourneyNode[] toJourneyNodeArray(List<Game> games) {
-        return (JourneyNode[]) games
+    private List<JourneyNode> toJourneyNodeList(List<Game> games) {
+        return games
                 .stream()
                 .map(game -> new JourneyNode(game.getName()))
-                .toArray();
+                .toList();
     }
 
     private Pair<List<Pair<String, String>>, List<Integer>> calculateLinksAndWeights(List<Game> games) {
         List<Pair<String, String>> links = new ArrayList<>(games.size() * 2);
         List<Integer> weights = new ArrayList<>(games.size() * 2);
 
-        for (Game g : games) {
-            var linksAndWeights = findSimilitudes(g, games);
+        for (int i = 0; i < games.size(); i++) {
+            Game g = games.get(i);
+            var linksAndWeights = findSimilitudes(g, games.subList(i + 1, games.size()));
+
             links.addAll(linksAndWeights.getFirstElement());
             weights.addAll(linksAndWeights.getSecondElement());
-
-            games.remove(g);
         }
 
         return new Pair<>(links, weights);

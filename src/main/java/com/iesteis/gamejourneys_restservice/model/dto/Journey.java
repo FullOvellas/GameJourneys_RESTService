@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Journey {
 
-    private JourneyNode[] nodes;
+    private List<JourneyNode> nodes;
     private List<Pair<String, String>> links;
     private List<Integer> weights;
 
-    public Journey(JourneyNode[] nodes, List<Pair<String, String>> links, List<Integer> weights) {
+    public Journey(List<JourneyNode> nodes, List<Pair<String, String>> links, List<Integer> weights) {
         this.nodes = nodes;
         this.links = links;
         this.weights = weights;
     }
 
-    public JourneyNode[] getNodes() {
+    public List<JourneyNode> getNodes() {
         return nodes;
     }
 

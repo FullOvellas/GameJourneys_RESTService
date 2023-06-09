@@ -1,16 +1,10 @@
 package com.iesteis.gamejourneys_restservice.model.entity.compositekeys;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
-@Getter
-@Setter
-@EqualsAndHashCode
 @Embeddable
 public class GameLanguageKey implements Serializable {
 
@@ -20,4 +14,24 @@ public class GameLanguageKey implements Serializable {
     @Column(name = "game_id")
     private Long gameId;
 
+    public Long getLanguageId() {
+        return languageId;
+    }
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameLanguageKey that = (GameLanguageKey) o;
+        return Objects.equals(languageId, that.languageId) && Objects.equals(gameId, that.gameId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(languageId, gameId);
+    }
 }
