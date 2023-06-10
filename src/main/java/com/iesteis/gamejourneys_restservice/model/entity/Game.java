@@ -54,6 +54,14 @@ public class Game {
     @OneToMany(mappedBy = "remasteredGame")
     private List<Remaster> remasters;
 
+    @ManyToMany
+    @JoinTable(
+            name = "games_tags",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags;
+
     public Long getId() {
         return id;
     }
@@ -124,5 +132,13 @@ public class Game {
 
     public void setRemasters(List<Remaster> remasters) {
         this.remasters = remasters;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
