@@ -6,15 +6,13 @@ import com.iesteis.gamejourneys_restservice.util.JwtUtil;
 import com.iesteis.gamejourneys_restservice.util.UserViewUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -29,7 +27,8 @@ public class AuthController {
     }
 
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(originPatterns = "http://localhost:*", allowedHeaders = {HttpHeaders.AUTHORIZATION})
     public ResponseEntity<?> login(@RequestBody AuthCredentialsRequest req) {
         try {
             Authentication authenticate = authenticationManager.authenticate(
@@ -41,11 +40,12 @@ public class AuthController {
 
             User user = (User) authenticate.getPrincipal();
 
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.add(HttpHeaders.AUTHORIZATION, jwtUtil.generateToken(user));
+            responseHeaders.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.AUTHORIZATION);
+
             return ResponseEntity.ok()
-                    .header(
-                            HttpHeaders.AUTHORIZATION,
-                            jwtUtil.generateToken(user)
-                    )
+                    .headers(responseHeaders)
                     .body(UserViewUtil.userToView(user));
 
         } catch (BadCredentialsException ex) {

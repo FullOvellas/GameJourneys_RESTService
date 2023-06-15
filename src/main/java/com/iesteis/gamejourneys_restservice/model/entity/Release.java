@@ -1,7 +1,5 @@
 package com.iesteis.gamejourneys_restservice.model.entity;
 
-import com.iesteis.gamejourneys_restservice.model.Platform;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;

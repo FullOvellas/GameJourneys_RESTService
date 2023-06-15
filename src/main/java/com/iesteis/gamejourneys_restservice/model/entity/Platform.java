@@ -1,4 +1,4 @@
-package com.iesteis.gamejourneys_restservice.model;
+package com.iesteis.gamejourneys_restservice.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;

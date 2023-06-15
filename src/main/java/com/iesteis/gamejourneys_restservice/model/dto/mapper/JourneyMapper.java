@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Component
 public class JourneyMapper {
 
-    private static final int LINK_THRESHOLD = 1;
+    private static final int LINK_THRESHOLD = 4;
     private final GamePersonRepository gamePersonRepository;
     private final Function<GamePerson, Pair<Person, RoleType>> mapToPersonRoleTypePair = gamePerson ->
             new Pair<>(gamePerson.getPerson(), gamePerson.getRole().getRoleType());
@@ -30,8 +30,7 @@ public class JourneyMapper {
         var links = linksWeights.getFirstElement();
         var weights = linksWeights.getSecondElement();
 
-
-        return new Journey(nodes, links, weights);
+        return new Journey(gameList.getName(), nodes, links, weights);
     }
 
     private List<JourneyNode> toJourneyNodeList(List<Game> games) {
@@ -41,13 +40,13 @@ public class JourneyMapper {
                 .toList();
     }
 
-    private Pair<List<Pair<String, String>>, List<Integer>> calculateLinksAndWeights(List<Game> games) {
-        List<Pair<String, String>> links = new ArrayList<>(games.size() * 2);
+    private Pair<List<Pair<Integer, Integer>>, List<Integer>> calculateLinksAndWeights(List<Game> games) {
+        List<Pair<Integer, Integer>> links = new ArrayList<>(games.size() * 2);
         List<Integer> weights = new ArrayList<>(games.size() * 2);
 
         for (int i = 0; i < games.size(); i++) {
             Game g = games.get(i);
-            var linksAndWeights = findSimilitudes(g, games.subList(i + 1, games.size()));
+            var linksAndWeights = findSimilitudes(g, games.subList(i + 1, games.size()), i);
 
             links.addAll(linksAndWeights.getFirstElement());
             weights.addAll(linksAndWeights.getSecondElement());
@@ -56,8 +55,8 @@ public class JourneyMapper {
         return new Pair<>(links, weights);
     }
 
-    private Pair<List<Pair<String, String>>, List<Integer>> findSimilitudes(Game game, List<Game> games) {
-        List<Pair<String, String>> links = new ArrayList<>();
+    private Pair<List<Pair<Integer, Integer>>, List<Integer>> findSimilitudes(Game game, List<Game> games, int offset) {
+        List<Pair<Integer, Integer>> links = new ArrayList<>();
         List<Integer> weights = new ArrayList<>();
         List<Pair<Person, RoleType>> staffAndRoleTypes = gamePersonRepository
                 .findByGame(game)
@@ -65,8 +64,9 @@ public class JourneyMapper {
                 .map(mapToPersonRoleTypePair)
                 .toList(); // use dtos
 
+        int i = offset + 1;
         for (Game g : games) {
-            int weight = 0; // TODO paralelizar
+            int weight = 0;
             if (g == null || g.equals(game)) continue;
 
             // matching developers
@@ -176,10 +176,11 @@ public class JourneyMapper {
                     ).count();
 
             if (weight >= LINK_THRESHOLD) {
-                links.add(new Pair<>(game.getName(), g.getName()));
+                links.add(new Pair<>(offset, i));
                 weights.add(weight);
             }
 
+            i++;
         }
 
         return new Pair<>(links, weights);

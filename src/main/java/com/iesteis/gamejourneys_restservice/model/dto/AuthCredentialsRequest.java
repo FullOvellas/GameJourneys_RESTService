@@ -1,11 +1,8 @@
 package com.iesteis.gamejourneys_restservice.model.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.io.Serializable;
 
-@Getter
-@Setter
-public class AuthCredentialsRequest {
+public class AuthCredentialsRequest implements Serializable {
 
     private String username;
     private String password;
@@ -16,5 +13,13 @@ public class AuthCredentialsRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

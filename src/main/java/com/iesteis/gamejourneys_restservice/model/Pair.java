@@ -1,8 +1,12 @@
 package com.iesteis.gamejourneys_restservice.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Pair<T, U> {
 
+    @JsonProperty("source")
     private T firstElement;
+    @JsonProperty("target")
     private U secondElement;
 
     public Pair(T firstElement, U secondElement) {

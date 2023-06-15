@@ -20,7 +20,6 @@ import java.util.List;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
-
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
@@ -29,10 +28,8 @@ public class JwtFilter extends OncePerRequestFilter {
         this.jwtUtil = jwtUtil;
     }
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         // Get authorization header and validate
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.hasText(header) || (StringUtils.hasText(header) && !header.startsWith("Bearer "))) {
@@ -42,9 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // Get user identity and set it on spring security context
         final String token = header.split(" ")[1].trim();
-        UserDetails userDetails = userRepository
-                .findByUsername(jwtUtil.getUsernameFromToken(token))
-                .orElse(null);
+        UserDetails userDetails = userRepository.findByUsername(jwtUtil.getUsernameFromToken(token)).orElse(null);
 
         // Get jwt token and validate
         if (!jwtUtil.validateToken(token, userDetails)) {
@@ -54,17 +49,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails, null,
-                userDetails == null ?
-                        List.of() : userDetails.getAuthorities()
+                userDetails == null ? List.of() : userDetails.getAuthorities()
         );
 
         authenticationToken.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request)
         );
-
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         filterChain.doFilter(request, response);
-
     }
 
 }
